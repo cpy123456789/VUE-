@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<body>
+ 
+    <script>
+      axios.all([
+      axios.get("http://localhost:8080/axios/noparams1", {  
+        
+      }),
+      axios.post('http://localhost:8080/axios/noparams2') 
+    ]).then(axios.spread((resdata, rescity) => {
+      // 上面两个请求都完成后，才按顺序执行这个回调方法
+      console.log('resdata', resdata)
+      console.log('rescity', rescity)
+    }))
+    </script>
+</body>
+</html>

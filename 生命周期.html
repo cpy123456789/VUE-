@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue生命周期</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js" type="text/javascript" charset="UTF-8"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="button" value="修改msg" @click="msg='No'">
+        <h3 id="h3">{{ msg }}</h3>
+    </div>
+
+    <script>
+        var vm = new Vue({
+            el:'#app',
+            data:{
+                msg:'ok'
+            },
+            methods:{
+                show(){
+                    console.log('执行了show方法')
+                }
+            },
+
+            //创建阶段生命周期函数
+            //执行此函数的时候，仅表示实例刚被创建，vue实例中的数据和方法还没有初始化
+            beforeCreate(){
+                // console.log(this.msg)
+                // this.show()
+            },
+
+            //执行此函数的时候,data和methods都已经初始化好了
+            //如果要调用methods中的方法，或者操作data中的数据，最早也只能在created中操作
+            created() {
+                // console.log(this.msg)
+                // this.show()
+            },
+
+            //执行此函数的时候，模板已经在内存中编译完成，但还没有渲染到页面中
+            beforeMount() {
+                // console.log(document.getElementById('h3').innerText)
+            },
+
+            //执行此函数的时候，内存中的模板已经挂载、渲染到了页面
+            //mounted是实例创建期间最后一个生命周期函数，执行完以后就表示实例完全创建好了，
+            //此时，组件脱离了创建阶段，进入运行阶段
+            mounted() {
+                // console.log(document.getElementById('h3').innerText)
+            },
+
+
+            //运行阶段生命周期函数
+            //执行此函数的时候，界面未更新，但数据更新了
+            beforeUpdate() {
+                // console.log('页面上元素的内容：'+document.getElementById('h3').innerText)
+                // console.log('data中的msg数据是：'+this.msg)
+            },
+            //此事件执行的时候，页面和data数据已经保持一致了，都是最新的
+            updated(){
+                // console.log('页面上元素的内容：'+document.getElementById('h3').innerText)
+                // console.log('data中的msg数据是：'+this.msg)
+            },
+
+            //最后能调用methods中的方法，或者操作data中的数据的函数
+            // beforeDestroy和destroyed只能通过手动触发$destroy来调用
+            beforeDestroy() {
+                // console.log(this.msg)
+                // this.show()
+                console.log('beforeDestroy')
+            },
+
+            destroyed() {
+                // console.log(this.msg)
+                // this.show()
+                console.log('destroyed')
+            }
+
+        });
+        // vm.$destroy()
+    </script>
+</body>
+</html>

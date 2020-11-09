@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<body>
+<div id="app">
+    <button @click="submit1()">get不带参数</button>
+    <button @click="submit2()">get带参数</button>
+    <button @click="submit3()">Post不带参数</button>
+    <button @click="submit4()">Post带参数</button>
+   
+    <div>{{msg}}</div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:"cpyqq"
+        },
+        methods:{
+           submit1:function () {
+               axios.get('http://localhost:8080/axios/noparams1')
+                   .then(ret => {
+                       console.log(ret.data)
+                   })
+           },
+            submit2:function () {
+                axios.get('http://localhost:8080/axios/getName1',{
+                    params:{
+                        name:this.msg
+                    }
+
+                })
+
+                    .then(ret => {
+                        console.log(ret.data)
+                    })
+            },
+            submit3:function() {
+                axios.post('http://localhost:8080/axios/noparams2')
+                   .then(ret => {
+                       console.log(ret.data)
+                   });
+            },
+
+            submit4:function () {
+                console.log(11);
+                axios.post('http://localhost:8080/axios/getName2?name="abc"')
+
+                    .then(ret => {
+                        console.log(ret.data)
+                    })
+            }
+        }
+    })
+</script>
+</body>
+</html>

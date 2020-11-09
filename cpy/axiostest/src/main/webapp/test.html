@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<script src="https://cdn.jsdelivr.net/npm/vue@2.5.16/dist/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<body>
+<div id="app">
+    <button @click="submit()">提交1</button>
+    <button @click="submit2()">提交2</button>
+    <div>{{msg}}</div>
+</div>
+
+<script>
+    var vm = new Vue({
+        el:'#app',
+        data:{
+            msg:"haha"
+        },
+        methods:{
+           submit:function () {
+               axios.get('http://localhost:8080/axios/cpy')
+                   .then(ret => {
+                       console.log(ret.data)
+                   })
+           },
+            submit2:function () {
+                axios.get('http://localhost:8080/axios/getName',{
+                    params:{
+                        name:"ym"
+                    }
+
+                })
+
+                    .then(ret => {
+                        console.log(ret.data)
+                    })
+            }
+        }
+    })
+</script>
+</body>
+</html>
